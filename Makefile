@@ -4,6 +4,10 @@ up-www:
 
 up-all: up-www
 
+build:
+	docker-compose run --rm www 'npm run build'
+	rm -fr $(PWD)/docs
+	cp -vr www/public $(PWD)/docs
 
 into-www:
 	docker-compose exec www bash
