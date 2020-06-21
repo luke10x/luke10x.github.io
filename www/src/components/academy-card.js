@@ -65,7 +65,7 @@ export default function OutlinedCard() {
 
       <CardActions>
         <Button size="small" href="https://10x-developer-academy.teachable.com/" target="_blank">
-          Enroll Code Academy Courses
+          Enroll TAXX-Stack Course
         </Button>
       </CardActions>
     </Card>

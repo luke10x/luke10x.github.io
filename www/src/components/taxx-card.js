@@ -58,8 +58,8 @@ export default function OutlinedCard() {
         <Typography variant="body2" component="p">
           A web app that helps you keeps on top of your daily tasks and ideas.
           Besides of being a great productivity tool,
-          it is created by 10X Developer Academy,
-          as a showcase of techniques and tools used in Academy courses.
+          it is created by 10X Developer,
+          as a showcase of techniques and tools used in TAXX-Stack course.
         </Typography>
       </CardContent>
 
