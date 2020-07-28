@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import facesImg from '../images/faces-2679740_640.jpg'
+import lukeImg from '../images/luke-avatar.png'
 
 const useStyles = makeStyles({
   root: {
@@ -40,8 +40,8 @@ export default function OutlinedCard() {
 
         <CardMedia
           className={classes.media}
-          image={facesImg}
-          title="TAXX application window on BeOS"
+          image={lukeImg}
+          title="Luke 10x"
         />
         
       <CardContent>
@@ -52,19 +52,18 @@ export default function OutlinedCard() {
           LUKE 10X
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          On social media
+          Typescript/Node.js/React + Java
         </Typography>
         <Typography variant="body2" component="p">
-          Apply course knowledge,
-          and get direct feedback during weekly coding sessions.
+          Hello, Welcome to this website.
         </Typography>
         <Typography variant="body2" component="p">
         </Typography>
       </CardContent>
 
       <CardActions>
-        <Button size="small" href="https://10x-developer-academy.teachable.com/" target="_blank">
-          Live coding timetable
+        <Button size="small" href="https://www.youtube.com/channel/UCs_0IjH05wHXhmk12RyWxeQ" target="_blank">
+          Check out my channel
         </Button>
       </CardActions>
     </Card>

@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import "../components/layout.css"
 import 'typeface-roboto'
 
-import LukeCard from '../components/luke-card';
 import TaxxCard from '../components/taxx-card';
 import AcademyCard from '../components/academy-card';
 import PracticeCard from '../components/practice-card';
@@ -22,10 +21,9 @@ const useStyles = makeStyles({
   paper: {
     minWidth: 275,
     display: 'flex',
-    flexWrap: 'wrap',
-    margingTop: '200px'
-  }
-  
+    flexWrap: 'wrap'
+
+  },
 });
 
 const IndexPage = () => {
@@ -38,8 +36,16 @@ const IndexPage = () => {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
 
-          <Grid item key="1" xs={12} sm={12} md={12}>
-            <LukeCard />
+          <Grid item key="1" xs={12} sm={6} md={4}>
+            <TaxxCard />
+          </Grid>
+          
+          <Grid item key="2" xs={12} sm={6} md={4}>
+            <AcademyCard />
+          </Grid>
+
+          <Grid item key="3" xs={12} sm={6} md={4}>
+            <PracticeCard />
           </Grid>
 
         </Grid>
