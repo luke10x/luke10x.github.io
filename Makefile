@@ -4,6 +4,11 @@ up-www:
 
 up-all: up-www
 
+install-www:
+	docker-compose run --rm www "npm install" 
+
+install-all: install-www
+
 build:
 	docker-compose run --rm www 'npm run build'
 	rm -fr $(PWD)/docs
