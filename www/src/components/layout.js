@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import 'typeface-roboto';
 import styled from 'styled-components';
 
@@ -30,12 +30,14 @@ const Layout = ({ children }) => {
       <header>
         {data.site.siteMetadata.title}
 
-      <StyledDiv>
-        Full Stack!
-      </StyledDiv>
-
+        <StyledDiv>
+          Full Stack!
+        </StyledDiv>
       </header>
       <main>{children}</main>
+      <footer>
+        <Link to="/">Home</Link> | <Link to="/blog">Blog</Link>
+      </footer>
     </>
   )
 }
