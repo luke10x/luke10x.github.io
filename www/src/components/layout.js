@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import 'typeface-roboto';
 import styled from 'styled-components';
+import './layout.css'
 
 const Header = styled.header`
   display: flex;
@@ -19,9 +19,6 @@ const Header = styled.header`
     font-size: 3rem;
     margin: 0;
   }
-  h2 {
-    font-size: 1.25rem;
-  }
   h3 {
     margin-top: 0;
     color: grey;
@@ -29,18 +26,6 @@ const Header = styled.header`
     font-size: 0.6rem;
   }
 `
-
-
-
-const StyledDiv = styled.div`
-font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-font-size: 4em;
-
--ms-text-size-adjust: 100%;
--webkit-text-size-adjust: 100%;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-`;
 
 const LayoutUnstyled = ({ children, className}) => {
   const data = useStaticQuery(graphql`
@@ -70,18 +55,6 @@ const LayoutUnstyled = ({ children, className}) => {
 }
 
 const Layout = styled(LayoutUnstyled)`
-  * {
-    font-family: 'CustomFont', Arial, sans-serif;
-    font-weight:normal;
-    font-style:normal;
-    line-height: 1.6;
-  }
-
-  text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  -moz-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-
   @media (min-width: 1000px){
     width: 800px;
     margin: 0 auto;
