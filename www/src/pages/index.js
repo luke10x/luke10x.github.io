@@ -2,27 +2,13 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Project from "../components/project"
+import YouTube from "../components/youtube"
+import Section from "../components/section"
 
 const Legacy = () => (
-    <div class="wrapper">
-      <content>
-        <div class="section">
-          <div class="title">🎬 Youtube Channel</div>
-          <div class="description">
-            Hi, my name is Luke, I am a full stack developer.
-            I would like to invite you to my
-            <br />
-            <div class="youtube">
-              <a
-                class="youtube button"
-                href="https://www.youtube.com/channel/UCs_0IjH05wHXhmk12RyWxeQ"
-                target="_blank"
-              >
-                10X Developer channel on Youtube
-              </a>
-            </div>
-          </div>
-        </div>
+    <>
+      <Section>
         <div class="section">
           <div class="title">
             ☑️ TAXX - Task Assistant PWA
@@ -62,6 +48,7 @@ const Legacy = () => (
             </div>
           </div>
         </div>
+        </Section>
 
         <div class="section">
           <div class="title">
@@ -321,8 +308,7 @@ const Legacy = () => (
           </div>
         </div>
 
-      </content>
-    </div>
+    </>
 );
 
 const IndexPage = () => {
@@ -330,11 +316,31 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Legacy />
-      <p>
-        Home index
-      </p>
-
+      <div className="sections">
+        <Section><YouTube /></Section>
+        <Section>
+          <Project
+            title="TAXX - Task Assistant PWA"
+            description='Application to manage my daily tasks. It is a fullstack application; Code is stored in a <a href="https://www.youtube.com/watch?v=9JrQP90c45E" target="_blank">monorepo</a>.'
+            tags={["argenida", "herdas",
+              "Typescript",
+              "Docker",
+              "React",
+              "TypeORM",
+              "Nest.js",
+              "Postgres",
+              "Styled components",
+              "AntD",
+              "Responsive Layout",
+              "Monorepo",
+              "OpenId Connect",
+              "Auth0",
+            ]}
+          />
+        </Section>
+        <Legacy />
+        
+      </div>
     </Layout>
   );
 }
