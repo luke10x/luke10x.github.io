@@ -22,7 +22,7 @@ function YouTube() {
 
   return (
     <div>
-      <div class="title">🎬 Youtube Channel</div>
+      <div class="title"><span role="img" aria-label="youtube">🎬</span>Youtube Channel</div>
       <div class="description">
         Hi, my name is Luke, I am a full stack developer.
         I would like to invite you to my
@@ -32,6 +32,7 @@ function YouTube() {
             class="button"
             href="https://www.youtube.com/channel/UCs_0IjH05wHXhmk12RyWxeQ"
             target="_blank"
+            rel="noreferrer"
           >
             10X Developer channel on Youtube
           </a>

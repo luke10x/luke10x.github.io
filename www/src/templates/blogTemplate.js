@@ -1,6 +1,21 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
+import styled from 'styled-components'
+
+const StyledHtml = styled.div`
+
+  pre {
+    overflow: scroll;
+    background: lightgrey;
+    border-left: 4px solid red;
+    padding: 1em 0.5em;
+  }
+  code {
+    font-family: "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace;
+
+  }
+`
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
@@ -13,7 +28,7 @@ export default function Template({
         <div className="blog-post">
           <h1>{frontmatter.title}</h1>
           <h2>{frontmatter.date}</h2>
-          <div
+          <StyledHtml
             className="blog-post-content"
             dangerouslySetInnerHTML={{ __html: html }}
           />

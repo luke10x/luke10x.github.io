@@ -1,11 +1,9 @@
 ---
-slug: "/blog/my-first-post"
+slug: "/blog/monorepo-vs-monolith"
 date: "2021-02-08"
-title: "My first blog post"
+title: "Monorepo vs Monolith"
+draft: false
 ---
-
-# Monorepo and Monolith
-
 Two words that start with Mono, which is means One.
 
 What it means is that all your code goes to same repository.
