@@ -1,20 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function Project({ title, description, tags }) {
+function Project({ icon, title, description, tags, links }) {
 
   return (
     <div>
-      <div class="title">☑️ {title}</div>
+      <div class="title">{icon} {title}</div>
       <div class="description">
-        {description}
+        <div dangerouslySetInnerHTML={{ __html: description }}/>
         <ul class="tags">
           {tags.map(tag => <li>{tag}</li>)}
         </ul>
         <div class="links">
-          <a class="taxx" href="http://taxx-spa.herokuapp.com/" target="_blank">
-            TAXX demo
-          </a>
+          {links.map(link => (
+            <a href={link.url} target="_blank">
+            {link.title}
+            </a>
+          ))}
         </div>
       </div>
     </div >

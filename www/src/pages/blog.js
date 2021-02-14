@@ -2,17 +2,19 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
-
-import 'typeface-roboto';
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     {
       allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
+        limit: 1000,
+        filter: {
+          fileAbsolutePath: {
+            glob: "/app/src/markdown-pages/*"
+          }
+        }
       ) {
         edges {
           node {
@@ -33,7 +35,7 @@ const IndexPage = () => {
       <SEO title="Blog" />
       
       <p>
-        Blog :)
+        Blog articles:
         {pages.map(
           page => <ul>
             <li><a href={page.slug}>{page.title}</a></li>

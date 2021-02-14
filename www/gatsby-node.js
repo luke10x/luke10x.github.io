@@ -23,12 +23,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+
+    const slug = node.frontmatter.slug;
+    if (!slug) {
+      // Projects don't have slug,
+      // and pages have slug,
+      // so do not create anything for projects 
+      return
+    } 
     createPage({
-      path: node.frontmatter.slug,
+      path: slug,
       component: blogPostTemplate,
       context: {
         // additional data can be passed via context
-        slug: node.frontmatter.slug,
+        slug,
       },
     })
   })
