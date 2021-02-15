@@ -12,6 +12,7 @@
   "license": "",
   "dependencies": {
     "gatsby": "^2.32.3",
+    "gatsby-plugin-cname": "^1.0.0",
     "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-source-filesystem": "^2.11.0",
     "gatsby-transformer-remark": "^2.16.0",

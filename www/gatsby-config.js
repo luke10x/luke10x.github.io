@@ -3,6 +3,7 @@ module.exports = {
     title: `Luke 10X`,
     description: `Full Stack Developer and Code Instructor`,
     author: `@realLuke10X`,
+    siteUrl: `https://www.luke10x.dev`
   },
   plugins: [
     {
@@ -21,5 +22,6 @@ module.exports = {
     },
     `gatsby-transformer-remark`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-cname`,
   ]
 }
