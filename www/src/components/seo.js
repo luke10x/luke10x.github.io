@@ -47,7 +47,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:url`,
-          content: site.siteMetadata.siteUrl,
+          content: Avatar,
         },
         {
           property: `og:image`,
