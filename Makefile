@@ -10,6 +10,19 @@ build:
 	rm -fr $(PWD)/docs
 	cp -vr www/public $(PWD)/docs
 
+.ONESHELL:
+publish:
+	cd docs
+	pwd
+	git init
+	git checkout -b master
+	git add .
+	git commit -m "🚀 release $$(date '+%6FT%T%z')"
+	git remote add origin git@github.com:luke10x/luke10x.github.io.git
+	git log
+	pwd
+	git push origin master -f
+
 into:
 	docker-compose exec www bash
 

@@ -1,0 +1,10 @@
+
+.markdown pre {
+  overflow: scroll;
+  background: lightgrey;
+  border-left: 4px solid red;
+  padding: 1em 0.5em;
+}
+.markdown code {
+  font-family: "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace;
+}
