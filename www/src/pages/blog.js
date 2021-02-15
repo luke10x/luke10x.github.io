@@ -14,6 +14,7 @@ const IndexPage = () => {
           fileAbsolutePath: {
             glob: "/app/src/markdown-pages/*"
           }
+          frontmatter: { draft: { ne: true}}
         }
       ) {
         edges {

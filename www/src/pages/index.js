@@ -17,6 +17,7 @@ const IndexPage = () => {
           fileAbsolutePath: {
             glob: "/app/src/markdown-projects/*"
           }
+          frontmatter: { draft: { ne: true}}
         }
       ) {
         edges {
@@ -32,7 +33,7 @@ const IndexPage = () => {
           }
         }
       }
-    }  
+    }
   `)
 
   const projects = data.allMarkdownRemark.edges.map(
