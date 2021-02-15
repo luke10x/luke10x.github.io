@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import SEO from "../components/seo"
 import Layout from "../components/layout"
-// import styled from 'styled-components'
 import "../assets/markdown.css"
 
 export default function Template({
@@ -11,6 +11,7 @@ export default function Template({
   const { frontmatter, html } = markdownRemark
   return (
     <Layout>
+      <SEO title={frontmatter.title} />
       <Link to="/blog">back</Link>
       <div className="blog-post-container">
         <div className="blog-post">

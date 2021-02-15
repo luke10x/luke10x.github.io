@@ -5,14 +5,15 @@ up:
 install:
 	docker-compose run --rm www "npm install" 
 
-build:
+clean:
+	rm -fr $(PWD)/www/public
+
+build: clean
 	docker-compose run --rm www 'npm run build'
-	rm -fr $(PWD)/docs
-	cp -vr www/public $(PWD)/docs
 
 .ONESHELL:
 publish:
-	cd docs
+	cd $(PWD)/www/public
 	pwd
 	git init
 	git checkout -b master
