@@ -41,3 +41,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   })
 }
+
+
+// A workaround for this issue:
+// https://github.com/gatsbyjs/gatsby/issues/17761
+const express= require('express');
+
+exports.onCreateDevServer=({app})=>{
+    app.use(express.static('public'))
+}
