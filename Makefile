@@ -20,7 +20,7 @@ publish:
 	git add .
 	git commit -m "🚀 release $$(date '+%6FT%T%z')"
 	git remote add origin git@github.com:luke10x/luke10x.github.io.git
-	git log
+	# git log
 	pwd
 	git push origin gh-pages -f
 
