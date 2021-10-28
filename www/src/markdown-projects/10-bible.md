@@ -9,7 +9,7 @@ tags:
   - Terminal
   - Console
   - Javascript
-  - termlib,js
+  - termlib.js
 
 links:
 
