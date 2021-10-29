@@ -1,6 +1,8 @@
 <html>
 <head>
 	<title>termlib ANSI-Mapping Sample</title>
+	<meta charset="UTF-8">
+
 <style type="text/css">
 body,p,a,td,li {
 	font-family: courier,fixed,swiss,sans-serif;
@@ -99,25 +101,38 @@ tt,pre {
 }
 
 .centered {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/* border: 5px solid #FFFF00; */
-	padding: 10px;
-	/* border: 1px solid red; */
-	height: 496px;
-	width: 935px;
-	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
+
+.footer {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	padding: 1em;
+	color: white;
+}
+.footer a {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	color: rgb(241, 179, 28);
+}
+
 </style>
 </head>
-<body  link="#77dd11" text="#cccccc" alink="#eeeeee" vlink="#77dd11"
-topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
-fdsfds	
+<body>
 <div class="centered">		
-<div id="termDiv" style="position:absolute; visibility: hidden; z-index:1;"></div>
+	<div id="termDiv" style=" visibility: hidden;"></div>
+	<div class="footer">
+		Return back to
+		<a href="/">
+			<span role="img" aria-label="luke10x.dev">👉 luke10x.dev 😍</span>
+		</a>
+	</div>
 </div>
+
 <script language="JavaScript" type="text/javascript" src="bible.js"></script>
 </body>
 </html>
