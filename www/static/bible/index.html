@@ -17,7 +17,9 @@ body {
 	background: #111;
 
 }
-
+h1 {
+	padding-bottom: 40px;
+}
 .term {
 	font-family: "Courier New",courier,fixed,monospace;
 	font-size: 18px;
@@ -30,74 +32,44 @@ body {
 	/* background: #95a9d5; */
 }
 
-a,a:link,a:visited {
-	text-decoration: none;
-	color: #77dd11;
+.keyboard {
+	padding-top: 20px;
+	width: 100%;
+	margin: 10px auto;
+	width: 1000px;
 }
-a:hover {
-	text-decoration: underline;
-	color: #77dd11;
-}
-a:active {
-	text-decoration: underline;
-	color: #eeeeee;
-}
+.keyline {
+	display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+	width: 100%;
+	padding:  10px 0 ;
 
-a.termopen,a.termopen:link,a.termopen:visited {
-	text-decoration: none;
-	color: #77dd11;
-	background: none;
 }
-a.termopen:hover {
-	text-decoration: none;
-	color: #222222;
-	background: #77dd11;
+.keyline button {
+    flex: 0 0 50px;
+    border: 1px solid #ccccff;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: #e2e5e6;
+    cursor: pointer;    
 }
-a.termopen:active {
-	text-decoration: none;
-	color: #222222;
-	background: #eeeeee;
+.keyline button.space {
+	flex: 1 0 60px;
 }
-
-table.inventory td {
-	padding-bottom: 20px !important;
+.keyline button.invisible {
+	visibility: hidden;
 }
-
-tt,pre {
-	font-family: courier,fixed,monospace;
-	color: #ccffaa;
-	font-size: 12px;
-	line-height: 15px;
+.keyline button:hover {
+  background: #f2f5f6;
 }
-
-.dimmed,.dimmed *,.dimmed * * {
-	background-color: #222222 !important;
-	color: #333333 !important;
-}
-
-@media print {
-	body { background-color: #ffffff; }
-	body,p,a,td,li,tt {
-		color: #000000;
-	}
-	pre,.prop,.markup {
-		color: #000000;
-	}
-	h1 {
-		color: #000000;
-	}
-	a,a:link,a:visited {
-		color: #ff0000;
-	}
-	a:hover {
-		color: #ff0000;
-	}
-	a:active {
-		color: #ff0000;
-	}
-	table.inventory {
-		display: none;
-	}
+.keyline button div {
+      height: 50%;
+      width: 50%;
+      text-align: center;
 }
 
 .centered {
@@ -121,10 +93,82 @@ tt,pre {
 }
 
 </style>
+
 </head>
 <body>
 <div class="centered">		
+	<h1>🌿 Study Bible using read-and-type method</h1>
 	<div id="termDiv" style=" visibility: hidden;"></div>
+	<div class="keyboard">
+		<div class="keyline">
+			<button onclick="onScreenKeyPress('`'.charCodeAt(0));">`</button>
+			<button onclick="onScreenKeyPress('1'.charCodeAt(0));">1</button>
+			<button onclick="onScreenKeyPress('2'.charCodeAt(0));">2</button>
+			<button onclick="onScreenKeyPress('3'.charCodeAt(0));">3</button>
+			<button onclick="onScreenKeyPress('4'.charCodeAt(0));">4</button>
+			<button onclick="onScreenKeyPress('5'.charCodeAt(0));">5</button>
+			<button onclick="onScreenKeyPress('6'.charCodeAt(0));">6</button>
+			<button onclick="onScreenKeyPress('7'.charCodeAt(0));">7</button>
+			<button onclick="onScreenKeyPress('8'.charCodeAt(0));">8</button>
+			<button onclick="onScreenKeyPress('9'.charCodeAt(0));">9</button>
+			<button onclick="onScreenKeyPress('0'.charCodeAt(0));">0</button>
+			<button onclick="onScreenKeyPress('-'.charCodeAt(0));">-</button>
+			<button onclick="onScreenKeyPress('+'.charCodeAt(0));">+</button>
+			<button class="space" onclick="onScreenKeyPress(8);">Backspace</button>
+		</div>
+		<div class="keyline">
+			<button onclick="onScreenKeyPress('q'.charCodeAt(0));">Q</button>
+			<button onclick="onScreenKeyPress('w'.charCodeAt(0));">W</button>
+			<button onclick="onScreenKeyPress('e'.charCodeAt(0));">E</button>
+			<button onclick="onScreenKeyPress('r'.charCodeAt(0));">R</button>
+			<button onclick="onScreenKeyPress('t'.charCodeAt(0));">T</button>
+			<button onclick="onScreenKeyPress('y'.charCodeAt(0));">Y</button>
+			<button onclick="onScreenKeyPress('u'.charCodeAt(0));">U</button>
+			<button onclick="onScreenKeyPress('i'.charCodeAt(0));">I</button>
+			<button onclick="onScreenKeyPress('o'.charCodeAt(0));">O</button>
+			<button onclick="onScreenKeyPress('p'.charCodeAt(0));">P</button>
+			<button onclick="onScreenKeyPress('['.charCodeAt(0));">[</button>
+			<button onclick="onScreenKeyPress(']'.charCodeAt(0));">]</button>
+		</div>
+		<div class="keyline">
+			<button onclick="onScreenKeyPress('a'.charCodeAt(0));">A</button>
+			<button onclick="onScreenKeyPress('s'.charCodeAt(0));">S</button>
+			<button onclick="onScreenKeyPress('d'.charCodeAt(0));">D</button>
+			<button onclick="onScreenKeyPress('d'.charCodeAt(0));">D</button>
+			<button onclick="onScreenKeyPress('f'.charCodeAt(0));">F</button>
+			<button onclick="onScreenKeyPress('g'.charCodeAt(0));">G</button>
+			<button onclick="onScreenKeyPress('h'.charCodeAt(0));">H</button>
+			<button onclick="onScreenKeyPress('j'.charCodeAt(0));">J</button>
+			<button onclick="onScreenKeyPress('k'.charCodeAt(0));">K</button>
+			<button onclick="onScreenKeyPress('l'.charCodeAt(0));">L</button>
+			<button onclick="onScreenKeyPress(';'.charCodeAt(0));">;</button>
+			<button onclick="onScreenKeyPress(':'.charCodeAt(0));">:</button>
+			<button class="space" onclick="onScreenKeyPress('\n'.charCodeAt(0));">&lt; Enter</button>
+		</div>
+		<div class="keyline">
+			<button class="invisible" onclick="onScreenKeyPress(''.charCodeAt(0));"></button>
+			<button onclick="onScreenKeyPress('z'.charCodeAt(0));">Z</button>
+			<button onclick="onScreenKeyPress('x'.charCodeAt(0));">X</button>
+			<button onclick="onScreenKeyPress('c'.charCodeAt(0));">C</button>
+			<button onclick="onScreenKeyPress('v'.charCodeAt(0));">V</button>
+			<button onclick="onScreenKeyPress('b'.charCodeAt(0));">B</button>
+			<button onclick="onScreenKeyPress('n'.charCodeAt(0));">N</button>
+			<button onclick="onScreenKeyPress('m'.charCodeAt(0));">M</button>
+			<button onclick="onScreenKeyPress(','.charCodeAt(0));">,</button>
+			<button onclick="onScreenKeyPress('.'.charCodeAt(0));">.</button>
+			<button onclick="onScreenKeyPress('?'.charCodeAt(0));">?</button>
+			<button class="invisible space" onclick="onScreenKeyPress(''.charCodeAt(0));"></button>
+			<button onclick="onScreenKeyPress(3);">⇧</button>
+			<button class="invisible" onclick="onScreenKeyPress(''.charCodeAt(0));"></button>
+		</div>
+		<div class="keyline">
+			<button class="space" onclick="onScreenKeyPress(' '.charCodeAt(0));">Space</button>
+			<button onclick="onScreenKeyPress(4);">⇦</button>
+			<button onclick="onScreenKeyPress(2);">⇩</button>
+			<button onclick="onScreenKeyPress(5);">⇨</button>
+		</div>
+	</div>
+	
 	<div class="footer">
 		Return back to
 		<a href="/">
@@ -134,5 +178,19 @@ tt,pre {
 </div>
 
 <script language="JavaScript" type="text/javascript" src="bible.js"></script>
+
+
+
+<script>
+	Terminal.prototype.Defaults.frameColor = '#ffff00';
+	Terminal.prototype.Defaults.frameWidth = 0;
+	Terminal.prototype.Defaults.bgColor = '#111';
+function onScreenKeyPress(code) {
+  console.log("Key code", code);
+	term.inputChar = code;
+}
+</script>
+
+
 </body>
 </html>
