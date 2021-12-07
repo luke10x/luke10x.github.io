@@ -14,5 +14,7 @@ tags:
 links:
   - title: Bible Track App
     url: http://bible-track.herokuapp.com/
+  - title: Source code
+    url: https://github.com/luke10x/bible-tracker
 ---
 Track time on reading Bible chapters, and take notes
