@@ -1,6 +1,6 @@
 ---
 icon: "📖"
-title: "Bible Reading tracker"
+title: "Bible Reading Tracker"
 tags:
   - Typescript
   - Docker
@@ -17,4 +17,4 @@ links:
   - title: Source code
     url: https://github.com/luke10x/bible-tracker
 ---
-Track time on reading Bible chapters, and take notes
+Track time on reading Bible chapters, and take notes.
