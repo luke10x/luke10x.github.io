@@ -13,7 +13,7 @@ tags:
   - Monorepo
 links:
   - title: Bible Track App
-    url: http://bible-track.herokuapp.com/
+    url: https://bible-track.herokuapp.com/
   - title: Source code
     url: https://github.com/luke10x/bible-tracker
 ---
