@@ -1,6 +1,6 @@
 ---
 slug: "/blog/study-bible-using-overtype-method"
-date: "2021-01-12"
+date: "2022-01-12"
 title: "Study Bible using Overtype method"
 draft: false
 ---
