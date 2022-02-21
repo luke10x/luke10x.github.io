@@ -7,7 +7,7 @@ draft: false
 
 Digital organizers and note-taking apps are great. Take a look at Google Keep, it can be used for note-taking and TODO lists as well. Like many others of this kind, Keep is interoperable with other applications, so you can copy-and-paste or share digital content across in many other ways. On top of that using a digital organizer, it is easy to access tasks and notes using any device as they are synchronized in the cloud.
 
-#### Taking notes & tracking tasks
+### Taking notes & tracking tasks
 
 There are so many productivity tools and organizers, where most of them are focused on 2 main activities:
 
@@ -16,7 +16,7 @@ There are so many productivity tools and organizers, where most of them are focu
 
 With Google Keep you can stylishly perform those two activities, enriched with multimedia capabilities, and taking advantage of embedding other technologies in the interlinked digital world. Ok, but why those two activities are so crucial in being productive?
 
-#### How does taking notes contribute to productivity?
+### How does taking notes contribute to productivity?
 
 There are several ways:
 - Stay Awake. Taking minutes during a meeting, or during a conversation writing down on important aspects makes you a better listener, because it forces you to keep the focus on the words you hear;
@@ -26,7 +26,7 @@ There are several ways:
 
 As an engineer, at work, I have a daily sync meeting with my team, where we revisit what we have been working on the previous day, and having the notes becoming very handy so that I can give my standup update in a concise and prepared way.
 
-#### Why tracking tasks is so important?
+### Why tracking tasks is so important?
 
 It is all about prioritizing. When you have your open tasks listed nicely together, you can choose:
 
@@ -36,7 +36,7 @@ It is all about prioritizing. When you have your open tasks listed nicely togeth
 
 The truth is, that time is a limited resource and not everything we want to do we can squeeze in.
 
-#### Bullet Journal
+### Bullet Journal
 
 When Ryder Caroll first published his Bullet Journal method, it quickly became viral. It is a new approach to the good old idea of journaling using pen and paper. It consists of:
 
@@ -44,16 +44,18 @@ When Ryder Caroll first published his Bullet Journal method, it quickly became v
 - also of Monthly Log;
 - and the Index Page describing on what pages to find the important stuff.
 
-#### Rapid Log 
-Each entry to this journal starts with a bullet describing the type of the entry.
+### Rapid Log 
+Each entry to this journal starts with a bullet describing the type of the entry. These are the different types of bullets that can be foungd in the Rapid Log:
 
-- `-` is a note, it is just an observation of something happening now
-- `◯` is an event or a meeting scheduled to happen on that day
-- `•` an open task for the day that is not done yet, until the end of the day this bullet will change in one of the following:
-- `╳` When the dot is crossed, it means the task is done
-- `>` if the dot turns into a forward arrow, that means this task is delayed to tomorrow day
-- `<` back arrow, means that is deprioritized and is to be rescheduled later and it is now moved to the monthly backlog
-- ~~`•` some tasks just become irrelevant and can be decided not to be worked anymore, and they just die on that day being struck through~~
+| Bullet | Meaning|
+|:------:|--------|
+| `-`    |is a note, it is just an observation of something happening now |
+| `◯`    |is an event or a meeting scheduled to happen on that day |
+| `•`    |an open task for the day that is not done yet, until the end of the day this bullet will change in one of the following: |
+| `╳`    |When the dot is crossed, it means the task is done |
+| `>`    |if the dot turns into a forward arrow, that means this task is delayed to tomorrow day |
+| `<`    |back arrow, means that is deprioritized and is to be rescheduled later and it is now moved to the monthly backlog |
+| ~~`•`~~| ~~some tasks just become irrelevant and can be decided not to be worked anymore, and they just die on that day being struck through~~ |
 
 For example, the rapid log of a day may look like this:
 ```	
@@ -67,7 +69,7 @@ TUE, 02/08/2020
 - Brochure site changes are moved to the QA review
 ```
 
-#### Digital or paper?
+### Digital or paper?
 
 Although occasionally I also use Google Keep for a very similar purpose, my main journal is a paper notebook, which I keep filing every day. I prefer the paper version for the following reasons:
 
