@@ -7,14 +7,13 @@ flex-direction: column;
 justify-items: center;
 align-items: center;
 a {
-  background: red;
-  color: white;
+  background: #ffd700;
+  color: #001934;
   flex: 0 1;
   padding: 1rem;
   margin: .5rem;
   border-radius: 3px;
   box-shadow: 2px 2px lightgrey;
-
 }
 
 `
