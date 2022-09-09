@@ -13,10 +13,11 @@ build: clean
 
 .ONESHELL:
 publish:
+	rm -fr $(PWD)/www/public/.git
 	cd $(PWD)/www/public
 	pwd
 	git init
-	git checkout -b gh-pages
+	git checkout -b gh-pages &&  git checkout  gh-pages
 	git add .
 	git commit -m "🚀 release $$(date '+%6FT%T%z')"
 	git remote add origin git@github.com:luke10x/luke10x.github.io.git
