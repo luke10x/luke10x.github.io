@@ -1,4 +1,5 @@
 ---
+draft: true
 icon: "🧮"
 title: "Speed Arithmetic"
 tags:

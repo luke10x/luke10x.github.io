@@ -54,7 +54,7 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <div className="sections">
-        <Section><YouTube /></Section>
+        {/* <Section><YouTube /></Section> */}
         {projects.map(project => (
           <Section>
             <Project

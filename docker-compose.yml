@@ -12,8 +12,18 @@ services:
     command:
       - |
         npm start -- -H 0.0.0.0
-    networks: [ 'my-network' ]
     ports: [ '8000:8000' ]
 
-networks:
-  my-network:
+  next-blog:
+    image: node
+    volumes:
+      - './next-blog:/app'
+    working_dir: '/app'
+    entrypoint: '/bin/bash -c'
+    user: node
+    command:
+      - |
+        npm run dev
+        tail -f /dev/null
+        npm start -- -H 0.0.0.0
+    ports: [ '3000:3000' ]
