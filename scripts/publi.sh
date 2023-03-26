@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $(pwd)/next-blog/dist/server/pages
+cd $(pwd)/next-blog/out
 pwd
 git init
 git checkout -b gh-pages

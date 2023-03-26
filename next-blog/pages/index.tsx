@@ -23,11 +23,28 @@ interface HomeProps {
 
 const Home:FC<HomeProps> = ({ posts, projects }) => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 md:p-0'>
+    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 md:p-0 gap-2'>
+
+      {projects.map(({ slug, frontmatter }) => (
+        <div
+          key={slug}
+          className='border border-gray-200 rounded-xl shadow-lg overflow-hidden flex flex-col'
+        >
+          <Link href={`/projects/${slug}`}>
+              <Image
+                width={650}
+                height={340}
+                alt={frontmatter.title}
+                src={`/${frontmatter.socialImage}`}
+              />
+              <h1 className='p-4'>{frontmatter.title}</h1>
+          </Link>
+        </div>
+      ))}
       {posts.map(({ slug, frontmatter }) => (
         <div
           key={slug}
-          className='border border-gray-200 m-2 rounded-xl shadow-lg overflow-hidden flex flex-col'
+          className='border border-gray-200 rounded-xl shadow-lg overflow-hidden flex flex-col'
         >
           <Link href={`/blog/${slug}`}>
               <Image
@@ -41,22 +58,6 @@ const Home:FC<HomeProps> = ({ posts, projects }) => {
         </div>
       ))}
 
-      {projects.map(({ slug, frontmatter }) => (
-        <div
-          key={slug}
-          className='border border-gray-200 m-2 rounded-xl shadow-lg overflow-hidden flex flex-col'
-        >
-          <Link href={`/projects/${slug}`}>
-              <Image
-                width={650}
-                height={340}
-                alt={frontmatter.title}
-                src={`/${frontmatter.socialImage}`}
-              />
-              <h1 className='p-4'>{frontmatter.title}</h1>
-          </Link>
-        </div>
-      ))}
 
     </div>
   );
@@ -64,7 +65,28 @@ const Home:FC<HomeProps> = ({ posts, projects }) => {
 
 export async function getStaticProps() {
   const files = fs.readdirSync('posts');
-  const posts = files
+
+  const projectFiles = fs.readdirSync('projects');
+  const projects = projectFiles
+    .map((fileName) => {
+      const slug = fileName
+        .replace('.md', '')
+        .replace(/^\d{1,}-/, "");
+
+      const readFile = fs.readFileSync(`projects/${fileName}`, 'utf-8');
+      const { data: frontmatter } = matter(readFile);
+      if (frontmatter.draft === true) {
+        return null;
+      }
+      return {
+        slug,
+        frontmatter,
+      };
+    })
+    .filter(f => f)
+    .reverse();
+    
+    const posts = files
     .map((fileName) => {
       const slug = fileName
         .replace('.md', '')
@@ -79,27 +101,8 @@ export async function getStaticProps() {
         frontmatter,
       };
     })
-    .filter(f => f);
-
-  const projectFiles = fs.readdirSync('projects');
-  const projects = projectFiles
-    .map((fileName) => {
-      const slug = fileName
-        .replace('.md', '')
-        .replace(/^\d{1,}-/, "");
-
-      const readFile = fs.readFileSync(`projects/${fileName}`, 'utf-8');
-      const { data: frontmatter } = matter(readFile);
-      console.log(frontmatter.socialImage);
-      if (frontmatter.draft === true) {
-        return null;
-      }
-      return {
-        slug,
-        frontmatter,
-      };
-    })
-    .filter(f => f);
+    .filter(f => f)
+    .reverse();
 
   return {
     props: {

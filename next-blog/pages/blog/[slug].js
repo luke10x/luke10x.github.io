@@ -1,12 +1,22 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import md from 'markdown-it';
+import Link from 'next/link';
 
 export default function PostPage({ frontmatter, content }) {
   return (
     <div className='prose mx-auto'>
       <h1>{frontmatter.title}</h1>
+      <div className="flex flex-wrap gap-2">
+        {frontmatter.date}
+      </div>
       <div dangerouslySetInnerHTML={{ __html: md({ html: true }).render(content) }} />
+      <div className="flex space-x-4">
+        <Link href="/" className="before:absolute before:-left-2">⬅ back</Link>
+        {frontmatter.links?.map((link, key) => (
+          <Link target="_blank" key={key} href={link.url} className="before:absolute before:-left-2">{link.title}</Link>
+        ))}
+      </div>
     </div>
   );
 }

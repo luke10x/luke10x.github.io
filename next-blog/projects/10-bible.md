@@ -15,7 +15,7 @@ socialImage: "social-img/bible-overtype-2.png"
 
 links:
   - title: Run it in your browser
-    url:  /bible/
+    url:  /bible/index.html
   - title: Source code 
     url: https://github.com/luke10x/bible-overtype
 ---

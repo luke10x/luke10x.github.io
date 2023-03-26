@@ -26,7 +26,7 @@ However, packaging and distribution of linux packages written in C is quite comp
 - It is minimal and lightweight, the executable binary is small;
 - Writing programs in C is so satisfying;
 
-On top of that *curses* library is quite portable, and in theory it can run on all major platforms (just it needs to be compile for each of them separately). I found that C programs can be compiled to WASM using [Emsripten][6]. Compiling it for WASM means that you could run the program in the browser on any platform.
+On top of that *curses* library is quite portable, and in theory it can run on all major platforms (just it needs to be compile for each of them separately). I found that C programs can be compiled to WASM using [Emscripten][6]. Compiling it for WASM means that you could run the program in the browser on any platform.
 
 The problem is that WASM does not really have terminal interface. I could find some really old attempts of people trying to run *curses* programs on WASM:
 

@@ -6,10 +6,12 @@ install:
 	docker-compose run --rm next-blog "npm install" 
 
 clean:
-	rm -fr $(PWD)/next-blog/public
+	rm -fr $(PWD)/next-blog/out
+	rm -fr $(PWD)/next-blog/.next
 
 build: clean
 	docker-compose run --rm next-blog 'npm run build'
+	docker-compose run --rm next-blog 'npm run export'
 
 publish:
 	./scripts/publi.sh
