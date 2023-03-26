@@ -2,6 +2,7 @@
 slug: "/blog/why-use-bullet-journal"
 date: "2022-02-20"
 title: "Why should you use the Bullet Journal method?"
+socialImage: "social-img/bullet-journal.png"
 draft: false
 ---
 

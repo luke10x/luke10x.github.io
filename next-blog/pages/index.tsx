@@ -1,14 +1,8 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import fs from 'fs';
 import matter from 'gray-matter';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { AppProps } from 'next/app'
 import { FC } from 'react';
-
-const inter = Inter({ subsets: ['latin'] })
 
 interface HomeProps {
   posts: {
@@ -18,8 +12,16 @@ interface HomeProps {
       socialImage: string,
     },
   }[],
+  projects: {
+    slug: string,
+    frontmatter: {
+      title: string,
+      socialImage: string,
+    },
+  }[],
 }
-const Home:FC<HomeProps> = ({ posts }) => {
+
+const Home:FC<HomeProps> = ({ posts, projects }) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 md:p-0'>
       {posts.map(({ slug, frontmatter }) => (
@@ -27,7 +29,7 @@ const Home:FC<HomeProps> = ({ posts }) => {
           key={slug}
           className='border border-gray-200 m-2 rounded-xl shadow-lg overflow-hidden flex flex-col'
         >
-          <Link href={`/post/${slug}`}>
+          <Link href={`/blog/${slug}`}>
               <Image
                 width={650}
                 height={340}
@@ -38,26 +40,71 @@ const Home:FC<HomeProps> = ({ posts }) => {
           </Link>
         </div>
       ))}
+
+      {projects.map(({ slug, frontmatter }) => (
+        <div
+          key={slug}
+          className='border border-gray-200 m-2 rounded-xl shadow-lg overflow-hidden flex flex-col'
+        >
+          <Link href={`/projects/${slug}`}>
+              <Image
+                width={650}
+                height={340}
+                alt={frontmatter.title}
+                src={`/${frontmatter.socialImage}`}
+              />
+              <h1 className='p-4'>{frontmatter.title}</h1>
+          </Link>
+        </div>
+      ))}
+
     </div>
   );
 }
 
 export async function getStaticProps() {
   const files = fs.readdirSync('posts');
+  const posts = files
+    .map((fileName) => {
+      const slug = fileName
+        .replace('.md', '')
+        .replace(/^\d{4}-\d{2}-\d{2}-/, "");
+      const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+      const { data: frontmatter } = matter(readFile);
+      if (frontmatter.draft === true) {
+        return null;
+      }
+      return {
+        slug,
+        frontmatter,
+      };
+    })
+    .filter(f => f);
 
-  const posts = files.map((fileName) => {
-    const slug = fileName.replace('.md', '').replace(/^\d\d-\d\d-\d\d/, '');
-    const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
-    const { data: frontmatter } = matter(readFile);
-    
-    return {
-      slug,
-      frontmatter,
-    };
-  });
+  const projectFiles = fs.readdirSync('projects');
+  const projects = projectFiles
+    .map((fileName) => {
+      const slug = fileName
+        .replace('.md', '')
+        .replace(/^\d{1,}-/, "");
+
+      const readFile = fs.readFileSync(`projects/${fileName}`, 'utf-8');
+      const { data: frontmatter } = matter(readFile);
+      console.log(frontmatter.socialImage);
+      if (frontmatter.draft === true) {
+        return null;
+      }
+      return {
+        slug,
+        frontmatter,
+      };
+    })
+    .filter(f => f);
+
   return {
     props: {
       posts,
+      projects,
     },
   };  
 }

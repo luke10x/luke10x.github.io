@@ -3,6 +3,8 @@ slug: /blog/install-debug-symbols-to-php-fpm-docker-container
 date: "2018-06-18T23:24:52+00:00"
 draft: false
 title: "Install debug symbols to fpm Docker container"
+socialImage: "social-img/debug-symbols.png"
+
 ---
 
 Container images don't include debug symbols,

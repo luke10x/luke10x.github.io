@@ -11,8 +11,9 @@ tags:
   - Javascript
   - termlib.js
 
-links:
+socialImage: "social-img/bible-overtype-2.png"
 
+links:
   - title: Run it in your browser
     url:  /bible/
   - title: Source code 

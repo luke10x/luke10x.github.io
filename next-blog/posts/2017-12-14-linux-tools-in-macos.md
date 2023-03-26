@@ -3,6 +3,8 @@ slug: /blog/linux-tools-in-macos
 date: "2017-12-14T20:15:52+00:00"
 draft: false
 title: "Linux Tools in macOS"
+socialImage: "social-img/macos-tools.png"
+
 ---
 First thing to do in macOS:
 

@@ -2,6 +2,7 @@
 slug: "/blog/monorepo-vs-monolith"
 date: "2021-02-08"
 title: "Monorepo vs Monolith"
+socialImage: "social-img/monorepo-monolith.png"
 draft: false
 ---
 Two words that start with Mono, which is means One.
@@ -10,7 +11,7 @@ What it means is that all your code goes to same repository.
 
 Opposed to polyrepo, where your source code is distributed into several separate repositories.
 
-[pic]
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9JrQP90c45E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Now the Monolith, is a word having same prefix as Monorepo, perhaps this is why is often confused,
 but it means something different.

@@ -3,6 +3,8 @@ slug: /blog/logging-best-practices
 date: "2017-03-17T23:44:32+01:00"
 draft: false
 title: "Logging best practices"
+socialImage: "social-img/logging-practices.png"
+
 ---
 
 Logs can be of different types and purposes, like error, audit and debug logs.

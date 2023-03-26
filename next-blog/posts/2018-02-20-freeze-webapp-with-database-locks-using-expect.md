@@ -3,6 +3,8 @@ slug: /blog/freeze-with-database-locks-using-expect
 date: "2018-02-20T22:20:00+00:00"
 draft: false
 title: "Freeze WebApp with database locks (and automate it with Expect)"
+socialImage: "social-img/freeze.png"
+
 ---
 Each PHP-FPM workers serve web requests relentlessly. 
 Sometimes it would be useful to pause a thread executing a 

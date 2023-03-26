@@ -1,6 +1,7 @@
 ---
 icon: "👾"
 title: "OAuth Testbed"
+socialImage: "social-img/oauth-testbed.png"
 tags:
   - OAuth
   - Auth0

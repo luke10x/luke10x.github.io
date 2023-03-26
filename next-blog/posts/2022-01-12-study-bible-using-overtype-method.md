@@ -2,6 +2,7 @@
 slug: "/blog/study-bible-using-overtype-method"
 date: "2022-01-12"
 title: "Study Bible using Overtype method"
+socialImage: "social-img/bible-overtype-1.png"
 draft: false
 ---
 
