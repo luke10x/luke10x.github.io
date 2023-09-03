@@ -1,5 +1,5 @@
 ---
-slug: "/blog/java-cannot-select-between-stdin-and-stdout"
+slug: "/blog/problems-with-oop"
 date: "2023-06-10"
 title: "Flaws of object-oriented programming"
 socialImage: "social-img/oop-flaws.png"
