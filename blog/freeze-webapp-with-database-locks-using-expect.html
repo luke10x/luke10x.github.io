@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; 
+          viewBox=&#x27;0 0 100 100&#x27;
+          %3E%3Ccircle 
+          cx=&#x27;50&#x27; cy=&#x27;50&#x27; r=&#x27;50&#x27; fill=&#x27;%23ff33ff&#x27; /%3E%3C/svg%3E"/><link rel="preload" href="/_next/static/css/f74e7403dfc41554.css" as="style"/><link rel="stylesheet" href="/_next/static/css/f74e7403dfc41554.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-cda2f1305c3d9424.js" defer=""></script><script src="/_next/static/chunks/main-83cebdb887f48834.js" defer=""></script><script src="/_next/static/chunks/pages/_app-6257153885dc7086.js" defer=""></script><script src="/_next/static/chunks/980-500204586efa6805.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-16f621665fa931ac.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_buildManifest.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="flex flex-col min-h-screen"><header class="bg-slate-200 mb-8 py-4"><div class="container mx-auto flex justify-center"><div><a href="/"><h1 class="text-black font-roboto text-5xl mb-2">LUKE 10X</h1><span class="block text-center text-gray-500 text-xxs block">FULLSTACK DEVELOPER &amp; CODE INSTRUCTOR</span></a></div><span class="mx-auto"></span> </div></header><main class="container mx-auto flex-1"><div class="prose mx-auto"><h1>Freeze WebApp with database locks (and automate it with Expect)</h1><div class="flex flex-wrap gap-2">2018-02-20T22:20:00+00:00</div><div><p>Each PHP-FPM workers serve web requests relentlessly.
+Sometimes it would be useful to pause a thread executing a
+specific script, so that the whole worker process could be
+stopped for some time and examined, (and later released to run again if needed).</p>
+<p>If that is a PHP app, setting a breakpoint in XDebug naturally
+feels like a way to achieve that. Yet, XDebug is not always available,-
+in fact it is not recommended to run it on production
+environment at all.</p>
+<p>However, webapps typically talk to databases. If any PHP script,
+is trying to write to a database record which is locked by another transaction,
+then it waits for the locking transaction to release the lock
+(which happens when transaction is committed or rolled back).</p>
+<p>Starting a transaction like this, but without ending it:</p>
+<pre><code>mysql&gt; START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; UPDATE wp_posts SET post_content=&quot;Pending content...&quot; WHERE id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0 
+</code></pre>
+<p>will result in write lock on the record. Therefore a PHP script
+will be frozen when trying to write to that database record.</p>
+<p>Any web request that tries to write to the locked record,
+now will be blocked by the database lock.</p>
+<p>[[[ Here comes the picture ]]]</p>
+<h2>But this is too much of typing...</h2>
+<p>The problem is that to lock a record in this way requires so much effort:
+first the transaction has to be started,
+then the locking update query has to be executed,
+and this database connection has to be left as is,
+meanwhile the stopped process can be scrutinized.</p>
+<p>Also it is important to make sure the transaction is ended before disconnecting,
+otherwise it will remain open until its timeout.</p>
+<p>To spare some typing and window switching,
+the interaction with the mysql client could be automated using Expect:</p>
+<p>From its man-page:</p>
+<pre><code>Expect is a program that &quot;talks&quot; to other interactive programs
+according  to  a  script.   Following the script, Expect knows
+what can be expected from  a  program  and  what  the  correct
+response  should be.  An interpreted language provides branch‐
+ing and high-level control structures to direct the  dialogue.
+In  addition,  the user can take control and interact directly
+when desired, afterward returning control to the script.
+</code></pre>
+<p>We will create an Expect script:</p>
+<pre><code>#!/usr/bin/expect
+
+set timeout 105
+trap {
+        send &quot;ROLLBACK;\rEXIT\r&quot;; expect -exact &quot;Bye&quot;; exit 0
+} SIGINT
+
+spawn docker exec -it enchantedlamp_mysql_1 sh -c &quot;exec mysql -uroot -p\&quot;\$MYSQL_ROOT_PASSWORD\&quot; wordpress&quot;
+expect -exact &quot;mysql&gt;&quot;
+send &quot;START TRANSACTION;\r&quot;
+expect -exact &quot;mysql&gt;&quot;
+send &quot;UPDATE wp_posts SET post_content='Pending content...' WHERE id=1;\r&quot;
+expect -exact &quot;mysql&gt;&quot;
+
+send_user &quot;RECORD BLOCKED FOR 100s (C^ FOR EARLY EXIT)&quot;
+send &quot;\r&quot;
+
+sleep 100
+expect -exact &quot;mysql&gt;&quot;
+send &quot;ROLLBACK;\rEXIT\r&quot;; expect -exact &quot;Bye&quot;; exit 0
+</code></pre>
+<p>This script can be run like <code>./block-record.exp</code>,
+it will give 100s for debugging the frozen state.
+It can be exited earlier with Ctrl+C at any time though.</p>
+<p>https://www.thegeekstuff.com/2010/10/expect-examples/</p>
+</div><div class="flex space-x-4"><a class="before:absolute before:-left-2" href="/">⬅ back</a></div></div></main><footer class="bg-slate-200 mt-8 py-4"><div class="container mx-auto flex justify-center">© 2023 Luke 10X</div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"frontmatter":{"slug":"/blog/freeze-with-database-locks-using-expect","date":"2018-02-20T22:20:00+00:00","draft":false,"title":"Freeze WebApp with database locks (and automate it with Expect)","socialImage":"social-img/freeze.png"},"content":"Each PHP-FPM workers serve web requests relentlessly. \nSometimes it would be useful to pause a thread executing a \nspecific script, so that the whole worker process could be\nstopped for some time and examined, (and later released to run again if needed).\n\nIf that is a PHP app, setting a breakpoint in XDebug naturally\nfeels like a way to achieve that. Yet, XDebug is not always available,-\nin fact it is not recommended to run it on production\nenvironment at all.\n\nHowever, webapps typically talk to databases. If any PHP script,\nis trying to write to a database record which is locked by another transaction,\nthen it waits for the locking transaction to release the lock\n(which happens when transaction is committed or rolled back).\n\nStarting a transaction like this, but without ending it:\n\n\tmysql\u003e START TRANSACTION;\n\tQuery OK, 0 rows affected (0.00 sec)\n\n\tmysql\u003e UPDATE wp_posts SET post_content=\"Pending content...\" WHERE id=1;\n\tQuery OK, 1 row affected (0.00 sec)\n\tRows matched: 1  Changed: 1  Warnings: 0 \n\nwill result in write lock on the record. Therefore a PHP script \nwill be frozen when trying to write to that database record.\n\nAny web request that tries to write to the locked record,\nnow will be blocked by the database lock.\n\n[[[ Here comes the picture ]]]\n\n\n## But this is too much of typing...\n\nThe problem is that to lock a record in this way requires so much effort:\nfirst the transaction has to be started,\nthen the locking update query has to be executed,\nand this database connection has to be left as is,\nmeanwhile the stopped process can be scrutinized.\n\nAlso it is important to make sure the transaction is ended before disconnecting,\notherwise it will remain open until its timeout.\n\nTo spare some typing and window switching,\nthe interaction with the mysql client could be automated using Expect:\n\nFrom its man-page:\n\n    Expect is a program that \"talks\" to other interactive programs\n    according  to  a  script.   Following the script, Expect knows\n    what can be expected from  a  program  and  what  the  correct\n    response  should be.  An interpreted language provides branch‐\n    ing and high-level control structures to direct the  dialogue.\n    In  addition,  the user can take control and interact directly\n    when desired, afterward returning control to the script.\n\nWe will create an Expect script:\n\n    #!/usr/bin/expect\n\n    set timeout 105\n    trap {\n            send \"ROLLBACK;\\rEXIT\\r\"; expect -exact \"Bye\"; exit 0\n    } SIGINT\n\n    spawn docker exec -it enchantedlamp_mysql_1 sh -c \"exec mysql -uroot -p\\\"\\$MYSQL_ROOT_PASSWORD\\\" wordpress\"\n    expect -exact \"mysql\u003e\"\n    send \"START TRANSACTION;\\r\"\n    expect -exact \"mysql\u003e\"\n    send \"UPDATE wp_posts SET post_content='Pending content...' WHERE id=1;\\r\"\n    expect -exact \"mysql\u003e\"\n\n    send_user \"RECORD BLOCKED FOR 100s (C^ FOR EARLY EXIT)\"\n    send \"\\r\"\n\n    sleep 100\n    expect -exact \"mysql\u003e\"\n    send \"ROLLBACK;\\rEXIT\\r\"; expect -exact \"Bye\"; exit 0\n\nThis script can be run like `./block-record.exp`,\nit will give 100s for debugging the frozen state.\nIt can be exited earlier with Ctrl+C at any time though.\n\nhttps://www.thegeekstuff.com/2010/10/expect-examples/\n"},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"freeze-webapp-with-database-locks-using-expect"},"buildId":"jxg3s3yU4HdFy4I86wlDI","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

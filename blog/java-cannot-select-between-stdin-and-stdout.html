@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; 
+          viewBox=&#x27;0 0 100 100&#x27;
+          %3E%3Ccircle 
+          cx=&#x27;50&#x27; cy=&#x27;50&#x27; r=&#x27;50&#x27; fill=&#x27;%23ff33ff&#x27; /%3E%3C/svg%3E"/><link rel="preload" href="/_next/static/css/f74e7403dfc41554.css" as="style"/><link rel="stylesheet" href="/_next/static/css/f74e7403dfc41554.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-cda2f1305c3d9424.js" defer=""></script><script src="/_next/static/chunks/main-83cebdb887f48834.js" defer=""></script><script src="/_next/static/chunks/pages/_app-6257153885dc7086.js" defer=""></script><script src="/_next/static/chunks/980-500204586efa6805.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-16f621665fa931ac.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_buildManifest.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="flex flex-col min-h-screen"><header class="bg-slate-200 mb-8 py-4"><div class="container mx-auto flex justify-center"><div><a href="/"><h1 class="text-black font-roboto text-5xl mb-2">LUKE 10X</h1><span class="block text-center text-gray-500 text-xxs block">FULLSTACK DEVELOPER &amp; CODE INSTRUCTOR</span></a></div><span class="mx-auto"></span> </div></header><main class="container mx-auto flex-1"><div class="prose mx-auto"><h1>Java Selector cannot be used for stdin/stdout</h1><div class="flex flex-wrap gap-2">2023-04-07</div><div><p>Well, I must say, I'm quite irate about this whole situation with Java
+and its inability to listen for stdin and stdout of a running process
+and turn them into SelectableChannels that can be registered to a Selector.
+It's just downright frustrating, especially given how useful SelectableChannel
+can be in other contexts.</p>
+<p>I was attempting to write a program that could interact with a long-running process
+by reading and writing to its stdin and stdout streams.
+And I was hoping to use selectable channels to do this in a single thread,
+rather than having to spin up multiple threads or use callbacks.</p>
+<pre><code>// Start the long-running process
+Process p = Runtime.getRuntime().exec(&quot;myLongRunningProcess&quot;);
+
+// Get the process's stdin and stdout streams
+OutputStream stdin = p.getOutputStream();
+InputStream stdout = p.getInputStream();
+
+// Wrap the streams in channels (which doesn't work!)
+SelectableChannel stdinChannel = Channels.newChannel(stdin);
+SelectableChannel stdoutChannel = Channels.newChannel(stdout);
+
+// Create a selector and register the channels
+Selector selector = Selector.open();
+stdinChannel.register(selector, SelectionKey.OP_READ);
+stdoutChannel.register(selector, SelectionKey.OP_READ);
+
+// Wait for messages on either channel
+while (true) {
+    selector.select();
+    Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();
+    for (SelectionKey key : selectedKeys) {
+        if (key.isReadable()) {
+            // Handle input from the selected channel
+            if (key.channel() == stdinChannel) {
+                // Long running process has typed something on stdin
+            } else if (key.channel() == stdoutChannel) {
+                // Long-running process has written to stdout
+            }
+        }
+    }
+}
+</code></pre>
+<p>As you can see, the code is fairly straightforward, but unfortunately,
+the part where we try to wrap the process's stdin and stdout streams
+in selectable channels simply doesn't work.</p>
+<p>We're left with no choice but to resort to using threads or callbacks
+to handle input and output from the process (I learned the hard way).</p>
+<p>Yes, it's great that my search was finally over once I read an answer to
+<a href="https://stackoverflow.com/questions/39931485/java-process-read-stdout-and-stderr-of-a-subprocess-in-a-single-thread/39932773">this question on Stack Overflow</a>,
+even if the outcome was unsatisfying in the sense that the approach I had initially hoped to use didn't work out.</p>
+<p>I've found an easy option using CompletableFutures to solve the problem:</p>
+<pre><code>Process p = Runtime.getRuntime().exec(commandArgs);
+CompletableFuture&lt;String&gt; errFut = readStderr(p.getErrorStream());
+CompletableFuture&lt;String&gt; outFut = readStderr(p.getInputStream());
+</code></pre>
+<p>And that <code>readStderr</code> method is using CompletableFutures
+to asynchronously read from an input stream, like this:</p>
+<pre><code>static CompletableFuture&lt;String&gt; readStderr(InputStream is) {
+    Executor sameThreadExecutor = Runnable::run;
+
+    return CompletableFuture.supplyAsync(() -&gt; {
+        try (
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+        ) {
+            StringBuilder res = new StringBuilder();
+            String inputLine;
+            while ((inputLine = br.readLine()) != null) {
+                res.append(inputLine).append(System.lineSeparator());
+                log.info(&quot;ERRRRRR {}:{}&quot;, tag, inputLine);
+            }
+            return res.toString();
+        } catch (Throwable e) {
+            throw new RuntimeException(&quot;problem with executing program&quot;, e);
+        }
+    }, sameThreadExecutor);
+}
+</code></pre>
+<p>Since we're using the same executor for both stdout and stderr streams,
+the stdout reading will be blocked until the stderr reading is finished.
+This is because the same thread is executing both tasks.</p>
+<p>If the second argument is not provided for the call to CompletableFuture.supplyAsync,
+the default executor for async tasks will be used.
+This default executor is based on the <code>ForkJoinPool.commonPool()</code> executor,
+which is shared across multiple CompletableFuture instances.</p>
+<p>This way the stdin and stdout will be read in parallelel, but doing this will block 2 threads.
+In general, blocking threads can be a serious limitation for high-performance applications,
+since it can limit the overall throughput of the system.</p>
+<p>there is still no way to create SelectableChannels from stdin and stdout streams.
+The SelectableChannel abstraction is a powerful feature of the java.nio package,
+since it allows you to efficiently manage I/O operations
+across multiple channels using a single thread.
+It's not clear why this functionality hasn't been added to the standard library yet.</p>
+</div><div class="flex space-x-4"><a class="before:absolute before:-left-2" href="/">⬅ back</a></div></div></main><footer class="bg-slate-200 mt-8 py-4"><div class="container mx-auto flex justify-center">© 2023 Luke 10X</div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"frontmatter":{"slug":"/blog/java-cannot-select-between-stdin-and-stdout","date":"2023-04-07","title":"Java Selector cannot be used for stdin/stdout","socialImage":"social-img/java-selector.png","draft":false},"content":"\nWell, I must say, I'm quite irate about this whole situation with Java \nand its inability to listen for stdin and stdout of a running process \nand turn them into SelectableChannels that can be registered to a Selector. \nIt's just downright frustrating, especially given how useful SelectableChannel\ncan be in other contexts.\n\nI was attempting to write a program that could interact with a long-running process \nby reading and writing to its stdin and stdout streams. \nAnd I was hoping to use selectable channels to do this in a single thread, \nrather than having to spin up multiple threads or use callbacks.\n\n    // Start the long-running process\n    Process p = Runtime.getRuntime().exec(\"myLongRunningProcess\");\n\n    // Get the process's stdin and stdout streams\n    OutputStream stdin = p.getOutputStream();\n    InputStream stdout = p.getInputStream();\n\n    // Wrap the streams in channels (which doesn't work!)\n    SelectableChannel stdinChannel = Channels.newChannel(stdin);\n    SelectableChannel stdoutChannel = Channels.newChannel(stdout);\n\n    // Create a selector and register the channels\n    Selector selector = Selector.open();\n    stdinChannel.register(selector, SelectionKey.OP_READ);\n    stdoutChannel.register(selector, SelectionKey.OP_READ);\n\n    // Wait for messages on either channel\n    while (true) {\n        selector.select();\n        Set\u003cSelectionKey\u003e selectedKeys = selector.selectedKeys();\n        for (SelectionKey key : selectedKeys) {\n            if (key.isReadable()) {\n                // Handle input from the selected channel\n                if (key.channel() == stdinChannel) {\n                    // Long running process has typed something on stdin\n                } else if (key.channel() == stdoutChannel) {\n                    // Long-running process has written to stdout\n                }\n            }\n        }\n    }\n\nAs you can see, the code is fairly straightforward, but unfortunately, \nthe part where we try to wrap the process's stdin and stdout streams \nin selectable channels simply doesn't work.\n\nWe're left with no choice but to resort to using threads or callbacks\nto handle input and output from the process (I learned the hard way).\n\nYes, it's great that my search was finally over once I read an answer to\n[this question on Stack Overflow](https://stackoverflow.com/questions/39931485/java-process-read-stdout-and-stderr-of-a-subprocess-in-a-single-thread/39932773), \neven if the outcome was unsatisfying in the sense that the approach I had initially hoped to use didn't work out.\n\nI've found an easy option using CompletableFutures to solve the problem:\n\n    Process p = Runtime.getRuntime().exec(commandArgs);\n    CompletableFuture\u003cString\u003e errFut = readStderr(p.getErrorStream());\n    CompletableFuture\u003cString\u003e outFut = readStderr(p.getInputStream());\n\nAnd that `readStderr` method is using CompletableFutures\nto asynchronously read from an input stream, like this:\n\n    static CompletableFuture\u003cString\u003e readStderr(InputStream is) {\n        Executor sameThreadExecutor = Runnable::run;\n\n        return CompletableFuture.supplyAsync(() -\u003e {\n            try (\n                InputStreamReader isr = new InputStreamReader(is);\n                BufferedReader br = new BufferedReader(isr);\n            ) {\n                StringBuilder res = new StringBuilder();\n                String inputLine;\n                while ((inputLine = br.readLine()) != null) {\n                    res.append(inputLine).append(System.lineSeparator());\n                    log.info(\"ERRRRRR {}:{}\", tag, inputLine);\n                }\n                return res.toString();\n            } catch (Throwable e) {\n                throw new RuntimeException(\"problem with executing program\", e);\n            }\n        }, sameThreadExecutor);\n    }\n\nSince we're using the same executor for both stdout and stderr streams,\nthe stdout reading will be blocked until the stderr reading is finished. \nThis is because the same thread is executing both tasks.\n\nIf the second argument is not provided for the call to CompletableFuture.supplyAsync, \nthe default executor for async tasks will be used. \nThis default executor is based on the `ForkJoinPool.commonPool()` executor, \nwhich is shared across multiple CompletableFuture instances.\n\nThis way the stdin and stdout will be read in parallelel, but doing this will block 2 threads.\nIn general, blocking threads can be a serious limitation for high-performance applications, \nsince it can limit the overall throughput of the system. \n\nthere is still no way to create SelectableChannels from stdin and stdout streams. \nThe SelectableChannel abstraction is a powerful feature of the java.nio package, \nsince it allows you to efficiently manage I/O operations \nacross multiple channels using a single thread.\nIt's not clear why this functionality hasn't been added to the standard library yet.\n"},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"java-cannot-select-between-stdin-and-stdout"},"buildId":"jxg3s3yU4HdFy4I86wlDI","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

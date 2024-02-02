@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; 
+          viewBox=&#x27;0 0 100 100&#x27;
+          %3E%3Ccircle 
+          cx=&#x27;50&#x27; cy=&#x27;50&#x27; r=&#x27;50&#x27; fill=&#x27;%23ff33ff&#x27; /%3E%3C/svg%3E"/><link rel="preload" href="/_next/static/css/f74e7403dfc41554.css" as="style"/><link rel="stylesheet" href="/_next/static/css/f74e7403dfc41554.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-cda2f1305c3d9424.js" defer=""></script><script src="/_next/static/chunks/main-83cebdb887f48834.js" defer=""></script><script src="/_next/static/chunks/pages/_app-6257153885dc7086.js" defer=""></script><script src="/_next/static/chunks/980-500204586efa6805.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-16f621665fa931ac.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_buildManifest.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="flex flex-col min-h-screen"><header class="bg-slate-200 mb-8 py-4"><div class="container mx-auto flex justify-center"><div><a href="/"><h1 class="text-black font-roboto text-5xl mb-2">LUKE 10X</h1><span class="block text-center text-gray-500 text-xxs block">FULLSTACK DEVELOPER &amp; CODE INSTRUCTOR</span></a></div><span class="mx-auto"></span> </div></header><main class="container mx-auto flex-1"><div class="prose mx-auto"><h1>Logging best practices</h1><div class="flex flex-wrap gap-2">2017-03-17T23:44:32+01:00</div><div><p>Logs can be of different types and purposes, like error, audit and debug logs.
+To work with them efficiently, we need to have certain tools and strategies.
+Here are several ideas how to use application logs more efficiently.</p>
+<h2>1. Consider about audit logging early</h2>
+<p>Even if there is no specific business need for it,
+like regulatory requirements, it can be useful for troubleshooting,
+and debugging. To implement an audit log in a clean way, it is necessary
+to consider about it at the early stages of the architectural design.
+<a href="https://www.martinfowler.com/eaaDev/DomainEvent.html">Domain Events</a>
+should be clearly separated and logged, at some cases even
+<a href="https://www.martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a>
+could be used.</p>
+<h2>2. Log Request ID and Correlation ID</h2>
+<p>HTTP provides request headers X-Request-ID and X-Correlation-ID,
+also comparable means can be used together with other protocols.
+Either generate it or make clients pass the request ID.
+Use same correlation ID in all downstream API calls.
+Using them in the logs, would enable filtering and could help
+to search for related events.</p>
+<h2>3. Include incident ID to the log messages</h2>
+<p>When things go wrong, users should be given with enough information
+required to indicate what is the problem when they ask for support.
+Exceptions should be logged, error message displayed to the user should
+indicate where the logs could be found.
+Of course there is no need to tell the user where the log file is stored,
+but it is useful to generate the same hash - incident ID, and include it
+both to the logged message and the one displayed for the user.</p>
+<h2>4. Implement 0 Bugs policy</h2>
+<p>All messages from the error log are considered bugs and must be resolved immediately.
+Log monitoring here is essential, tools should support easy real time monitoring,
+with ability to group and filter error messages.
+Noise should be removed from the error logs. When somebody is already looking at
+production issue, any messages related to that issue should not flood others.</p>
+<h2>5. Define tolerance thresholds</h2>
+<p>Some specific errors might only indicate problem when they occur continuously,
+for example some remote service timeouts could be tolerated, if the don't
+reach a threshold per time interval.
+Monitoring tools should support a way to filter repeated messages that are
+within tolerance limits for that type of errors.</p>
+</div><div class="flex space-x-4"><a class="before:absolute before:-left-2" href="/">⬅ back</a></div></div></main><footer class="bg-slate-200 mt-8 py-4"><div class="container mx-auto flex justify-center">© 2023 Luke 10X</div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"frontmatter":{"slug":"/blog/logging-best-practices","date":"2017-03-17T23:44:32+01:00","draft":false,"title":"Logging best practices","socialImage":"social-img/logging-practices.png"},"content":"\nLogs can be of different types and purposes, like error, audit and debug logs.\nTo work with them efficiently, we need to have certain tools and strategies.\nHere are several ideas how to use application logs more efficiently.  \n\n## 1. Consider about audit logging early\n\nEven if there is no specific business need for it,\nlike regulatory requirements, it can be useful for troubleshooting,\nand debugging. To implement an audit log in a clean way, it is necessary \nto consider about it at the early stages of the architectural design.\n[Domain Events](https://www.martinfowler.com/eaaDev/DomainEvent.html)\nshould be clearly separated and logged, at some cases even\n[Event Sourcing](https://www.martinfowler.com/eaaDev/EventSourcing.html)\ncould be used.\n\n## 2. Log Request ID and Correlation ID\n\nHTTP provides request headers X-Request-ID and X-Correlation-ID,\nalso comparable means can be used together with other protocols.\nEither generate it or make clients pass the request ID.\nUse same correlation ID in all downstream API calls.\nUsing them in the logs, would enable filtering and could help\nto search for related events.\n\n## 3. Include incident ID to the log messages \n\nWhen things go wrong, users should be given with enough information\nrequired to indicate what is the problem when they ask for support.\nExceptions should be logged, error message displayed to the user should\nindicate where the logs could be found.\nOf course there is no need to tell the user where the log file is stored,\nbut it is useful to generate the same hash - incident ID, and include it\nboth to the logged message and the one displayed for the user.\n\n## 4. Implement 0 Bugs policy\n\nAll messages from the error log are considered bugs and must be resolved immediately.\nLog monitoring here is essential, tools should support easy real time monitoring,\nwith ability to group and filter error messages. \nNoise should be removed from the error logs. When somebody is already looking at\nproduction issue, any messages related to that issue should not flood others.\n\n## 5. Define tolerance thresholds\n\nSome specific errors might only indicate problem when they occur continuously,\nfor example some remote service timeouts could be tolerated, if the don't\nreach a threshold per time interval.\nMonitoring tools should support a way to filter repeated messages that are\nwithin tolerance limits for that type of errors.\n"},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"logging-best-practices"},"buildId":"jxg3s3yU4HdFy4I86wlDI","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

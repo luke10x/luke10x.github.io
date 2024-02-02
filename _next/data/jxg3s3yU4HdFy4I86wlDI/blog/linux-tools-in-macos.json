@@ -1,0 +1,1 @@
+{"pageProps":{"frontmatter":{"slug":"/blog/linux-tools-in-macos","date":"2017-12-14T20:15:52+00:00","draft":false,"title":"Linux Tools in macOS","socialImage":"social-img/macos-tools.png"},"content":"First thing to do in macOS:\n\n    brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt gsort gsed netcat\n"},"__N_SSG":true}

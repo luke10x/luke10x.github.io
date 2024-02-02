@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; 
+          viewBox=&#x27;0 0 100 100&#x27;
+          %3E%3Ccircle 
+          cx=&#x27;50&#x27; cy=&#x27;50&#x27; r=&#x27;50&#x27; fill=&#x27;%23ff33ff&#x27; /%3E%3C/svg%3E"/><link rel="preload" href="/_next/static/css/f74e7403dfc41554.css" as="style"/><link rel="stylesheet" href="/_next/static/css/f74e7403dfc41554.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-cda2f1305c3d9424.js" defer=""></script><script src="/_next/static/chunks/main-83cebdb887f48834.js" defer=""></script><script src="/_next/static/chunks/pages/_app-6257153885dc7086.js" defer=""></script><script src="/_next/static/chunks/980-500204586efa6805.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-16f621665fa931ac.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_buildManifest.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="flex flex-col min-h-screen"><header class="bg-slate-200 mb-8 py-4"><div class="container mx-auto flex justify-center"><div><a href="/"><h1 class="text-black font-roboto text-5xl mb-2">LUKE 10X</h1><span class="block text-center text-gray-500 text-xxs block">FULLSTACK DEVELOPER &amp; CODE INSTRUCTOR</span></a></div><span class="mx-auto"></span> </div></header><main class="container mx-auto flex-1"><div class="prose mx-auto"><h1>Monorepo vs Monolith</h1><div class="flex flex-wrap gap-2">2021-02-08</div><div><p>Two words that start with Mono, which is means One.</p>
+<p>What it means is that all your code goes to same repository.</p>
+<p>Opposed to polyrepo, where your source code is distributed into several separate repositories.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9JrQP90c45E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Now the Monolith, is a word having same prefix as Monorepo, perhaps this is why is often confused,
+but it means something different.</p>
+<p>Monolith describes a software product, that is shipped and deployed together.</p>
+<p>This term comes from Microservices Architecture, but word monolith is defines something what is actually Opposite to a microservice.</p>
+<p>Clearly Monolith and Monorepo, these are two different concepts, they may intersect, but essentially they describe two different qualities.</p>
+<p>When software consists of different components,
+the way how it is organized in Version Control System may wary from Monorepo (all code is in one repository) to Polyrepo (each component has for it's repository).</p>
+<p>And then Monolith describes the way how the software is packaged, and shipped,-  which is one big deployment of software, no matter how many different responsibilities this package has, all is released in one go. It is opposed to microservices, where each of the microservice is deployed and released together.</p>
+<p>A software product may be described by both version-control and deployment strategies independently. Effectively, each software product may be organized in 4 different ways:</p>
+<h2>1. Monolith Monorepo</h2>
+<p>This is the simplest one, all code from single repository is deployed together. Mostly used by small projects. The software may serve different responsibilities (like backend and frontend), yet it is all deployed together.</p>
+<p>Pros:</p>
+<ul>
+<li>Easy to navigate through the code</li>
+<li>Simple deployment pipeline</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>May be difficult to maintain when project goes big, and starts to serve multiple responsibilities.</li>
+<li>Cannot scale deployment of different components independently</li>
+</ul>
+<h2>2. Monolith Polyrepo</h2>
+<p>This is same as one above, but it uses libraries and modules stored in external repositories. Compared to Monolith Monorepo this may have cleaner smaller code bases in each repo, which makes it easier to maintain. But it is still deployed all together at once.</p>
+<h2>3. Microservice Polyrepo</h2>
+<p>Here the application is distributed, we have components deployed separately, but the all are stored in one repository.</p>
+<p>Pros:</p>
+<ul>
+<li>Small size of the components</li>
+<li>Each component can be scaled independently</li>
+<li>Relatively simple build pipelines</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>It is not as easy to navigate through the code, or onboard new people</li>
+</ul>
+<h2>4. Microservice Monorepo</h2>
+<p>There is only one repository, yet all the components clearly separated, so that they can be released together.</p>
+<p>Pros:</p>
+<ul>
+<li>Small size of the components</li>
+<li>Each component can be scaled independently</li>
+<li>Code is easy to navigate through</li>
+<li>Onboarding of new team members is easier</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Build pipelines are more complicated, because not all of the CI/CD tools have out-of-box monorepo support</li>
+</ul>
+</div><div class="flex space-x-4"><a class="before:absolute before:-left-2" href="/">⬅ back</a></div></div></main><footer class="bg-slate-200 mt-8 py-4"><div class="container mx-auto flex justify-center">© 2023 Luke 10X</div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"frontmatter":{"slug":"/blog/monorepo-vs-monolith","date":"2021-02-08","title":"Monorepo vs Monolith","socialImage":"social-img/monorepo-monolith.png","draft":false},"content":"Two words that start with Mono, which is means One.\n\nWhat it means is that all your code goes to same repository.\n\nOpposed to polyrepo, where your source code is distributed into several separate repositories.\n\n\u003ciframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/9JrQP90c45E\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen\u003e\u003c/iframe\u003e\n\nNow the Monolith, is a word having same prefix as Monorepo, perhaps this is why is often confused,\nbut it means something different.\n\nMonolith describes a software product, that is shipped and deployed together.\n\nThis term comes from Microservices Architecture, but word monolith is defines something what is actually Opposite to a microservice.\n\nClearly Monolith and Monorepo, these are two different concepts, they may intersect, but essentially they describe two different qualities.\n\nWhen software consists of different components,\nthe way how it is organized in Version Control System may wary from Monorepo (all code is in one repository) to Polyrepo (each component has for it's repository).\n\nAnd then Monolith describes the way how the software is packaged, and shipped,-  which is one big deployment of software, no matter how many different responsibilities this package has, all is released in one go. It is opposed to microservices, where each of the microservice is deployed and released together.\n\nA software product may be described by both version-control and deployment strategies independently. Effectively, each software product may be organized in 4 different ways:\n\n## 1. Monolith Monorepo\n\nThis is the simplest one, all code from single repository is deployed together. Mostly used by small projects. The software may serve different responsibilities (like backend and frontend), yet it is all deployed together.\n\nPros:\n- Easy to navigate through the code\n- Simple deployment pipeline\n\nCons:\n- May be difficult to maintain when project goes big, and starts to serve multiple responsibilities.\n- Cannot scale deployment of different components independently\n\n## 2. Monolith Polyrepo\n\nThis is same as one above, but it uses libraries and modules stored in external repositories. Compared to Monolith Monorepo this may have cleaner smaller code bases in each repo, which makes it easier to maintain. But it is still deployed all together at once.\n\n## 3. Microservice Polyrepo\n\nHere the application is distributed, we have components deployed separately, but the all are stored in one repository.\n\nPros:\n- Small size of the components\n- Each component can be scaled independently\n- Relatively simple build pipelines\n\nCons:\n- It is not as easy to navigate through the code, or onboard new people\n\n## 4. Microservice Monorepo\n\nThere is only one repository, yet all the components clearly separated, so that they can be released together.\n\nPros:\n- Small size of the components\n- Each component can be scaled independently\n- Code is easy to navigate through\n- Onboarding of new team members is easier\n\nCons:\n- Build pipelines are more complicated, because not all of the CI/CD tools have out-of-box monorepo support\n"},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"monorepo-vs-monolith-common-confusion"},"buildId":"jxg3s3yU4HdFy4I86wlDI","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

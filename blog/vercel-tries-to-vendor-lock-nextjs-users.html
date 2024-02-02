@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; 
+          viewBox=&#x27;0 0 100 100&#x27;
+          %3E%3Ccircle 
+          cx=&#x27;50&#x27; cy=&#x27;50&#x27; r=&#x27;50&#x27; fill=&#x27;%23ff33ff&#x27; /%3E%3C/svg%3E"/><link rel="preload" href="/_next/static/css/f74e7403dfc41554.css" as="style"/><link rel="stylesheet" href="/_next/static/css/f74e7403dfc41554.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-8fa1640cc84ba8fe.js" defer=""></script><script src="/_next/static/chunks/framework-cda2f1305c3d9424.js" defer=""></script><script src="/_next/static/chunks/main-83cebdb887f48834.js" defer=""></script><script src="/_next/static/chunks/pages/_app-6257153885dc7086.js" defer=""></script><script src="/_next/static/chunks/980-500204586efa6805.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-16f621665fa931ac.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_buildManifest.js" defer=""></script><script src="/_next/static/jxg3s3yU4HdFy4I86wlDI/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="flex flex-col min-h-screen"><header class="bg-slate-200 mb-8 py-4"><div class="container mx-auto flex justify-center"><div><a href="/"><h1 class="text-black font-roboto text-5xl mb-2">LUKE 10X</h1><span class="block text-center text-gray-500 text-xxs block">FULLSTACK DEVELOPER &amp; CODE INSTRUCTOR</span></a></div><span class="mx-auto"></span> </div></header><main class="container mx-auto flex-1"><div class="prose mx-auto"><h1>Vercel tries to vendor lock Next.js users</h1><div class="flex flex-wrap gap-2">2023-03-26</div><div><p>As someone who recently migrated their blog (this very website) from Gatsby to Next.js,
+I can attest to the challenges involved in the process.
+While Gatsby may have been a trendy solution in the past,
+I found that it lacked the features and flexibility.
+Next.js seems to be much better static site generator than Gatsby,
+even though Gatsby actually is a Static Site Generator, while Next.js is not.</p>
+<p>However, while Next.js offers many advantages over Gatsby,
+I was frustrated by some of the drawbacks of using the framework,
+particularly the way in which Vercel seems to lock users into their hosting platform.</p>
+<p>To begin with, Vercel is the company that maintains the Next.js framework,
+which is currently the most popular React-based framework.
+While this may seem like a good thing at first glance,
+it means that Vercel has a significant amount of control
+over the development and direction of Next.js.</p>
+<p>One way in which Vercel tries to keep Next.js users locked into their hosting platform
+is by making it difficult to deploy Next.js applications anywhere else.
+They achieve that by constantly changing build options
+making difficult to search online of working step-by-step guides
+to deploy Next.Js application as static frontend application,
+decoupled of their Node based runtime.</p>
+<p>What if my backends for better or wores are in Java?
+Or what if I want to take advantage of
+CDN or AWS S3 deployment.
+Or like in this case I just want to push it to GitHub Pages?</p>
+<p>All of that is getting increasingly hard until users might just give up
+and they may feel pressured to use Vercel's platform to avoid these challenges,
+even if they would prefer to deploy their applications elsewhere.</p>
+<p>As I worked on deploying your Next.js application on GitHub Pages,
+I discovered that GitHub was trying to build your pages as Jekyll sites,
+which was causing some significant issues.
+Specifically, it was &quot;eating&quot; the assets like CSS of my website,
+leaving your it broken and non-functional.</p>
+<p>After some investigation, I discovered that if there was a directory starting with an '_' on GitHub Pages,
+the platform would automatically try to build the files with Jekyll,
+regardless of whether or not they were Jekyll-based.
+Jekyll is probabply the first Static Site Generator that achived signifficant popularity,
+although I am not entirelly sure wheather it is still as popular as it use to be.
+Nobody is using it anymore basically...</p>
+<p>Fortunately, I eventually discovered that
+<strong>dropping a .nojekyll file into the root of your public directory</strong>
+would prevent GitHub Pages from building your files with Jekyll,
+and allow the assets to be properly displayed on your website.</p>
+<p>Interestingly, I also began to suspect that Vercel might intentionally ship their assets in the _next directory
+(starting with an underscore), making it more challenging to deploy Next.js on GitHub Pages.
+While I have no proves of such deliberate action, obviously it is a reasonable accusation!
+This could be part of their strategy to make Next.js users more likely to choose Vercel for hosting,
+as it's easier than dealing with the complications involved in deploying Next.js on GitHub Pages.</p>
+<p>What can I say? Sometimes life just simply is not easy.
+Thankfully, I was able to successfully deploy my Next.js application on GitHub Pages,
+albeit after a great deal of persistence and effort.</p>
+</div><div class="flex space-x-4"><a class="before:absolute before:-left-2" href="/">⬅ back</a></div></div></main><footer class="bg-slate-200 mt-8 py-4"><div class="container mx-auto flex justify-center">© 2023 Luke 10X</div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"frontmatter":{"slug":"/blog/vercel-tries-to-vendor-lock-nextjs-users","date":"2023-03-26","title":"Vercel tries to vendor lock Next.js users","socialImage":"social-img/jekyll.png","draft":false},"content":"\nAs someone who recently migrated their blog (this very website) from Gatsby to Next.js, \nI can attest to the challenges involved in the process. \nWhile Gatsby may have been a trendy solution in the past, \nI found that it lacked the features and flexibility.\nNext.js seems to be much better static site generator than Gatsby,\neven though Gatsby actually is a Static Site Generator, while Next.js is not.\n\nHowever, while Next.js offers many advantages over Gatsby, \nI was frustrated by some of the drawbacks of using the framework, \nparticularly the way in which Vercel seems to lock users into their hosting platform. \n\nTo begin with, Vercel is the company that maintains the Next.js framework,\nwhich is currently the most popular React-based framework. \nWhile this may seem like a good thing at first glance, \nit means that Vercel has a significant amount of control\nover the development and direction of Next.js.\n\nOne way in which Vercel tries to keep Next.js users locked into their hosting platform\nis by making it difficult to deploy Next.js applications anywhere else. \nThey achieve that by constantly changing build options\nmaking difficult to search online of working step-by-step guides\nto deploy Next.Js application as static frontend application,\ndecoupled of their Node based runtime.\n\nWhat if my backends for better or wores are in Java?\nOr what if I want to take advantage of\nCDN or AWS S3 deployment.\nOr like in this case I just want to push it to GitHub Pages?\n\nAll of that is getting increasingly hard until users might just give up\nand they may feel pressured to use Vercel's platform to avoid these challenges, \neven if they would prefer to deploy their applications elsewhere.\n\nAs I worked on deploying your Next.js application on GitHub Pages,\nI discovered that GitHub was trying to build your pages as Jekyll sites, \nwhich was causing some significant issues. \nSpecifically, it was \"eating\" the assets like CSS of my website,\nleaving your it broken and non-functional.\n\nAfter some investigation, I discovered that if there was a directory starting with an '_' on GitHub Pages, \nthe platform would automatically try to build the files with Jekyll, \nregardless of whether or not they were Jekyll-based. \nJekyll is probabply the first Static Site Generator that achived signifficant popularity,\nalthough I am not entirelly sure wheather it is still as popular as it use to be.\nNobody is using it anymore basically...\n\nFortunately, I eventually discovered that\n**dropping a .nojekyll file into the root of your public directory**\nwould prevent GitHub Pages from building your files with Jekyll,\nand allow the assets to be properly displayed on your website. \n\nInterestingly, I also began to suspect that Vercel might intentionally ship their assets in the _next directory\n(starting with an underscore), making it more challenging to deploy Next.js on GitHub Pages. \nWhile I have no proves of such deliberate action, obviously it is a reasonable accusation!\nThis could be part of their strategy to make Next.js users more likely to choose Vercel for hosting,\nas it's easier than dealing with the complications involved in deploying Next.js on GitHub Pages.\n\nWhat can I say? Sometimes life just simply is not easy. \nThankfully, I was able to successfully deploy my Next.js application on GitHub Pages, \nalbeit after a great deal of persistence and effort. \n"},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"vercel-tries-to-vendor-lock-nextjs-users"},"buildId":"jxg3s3yU4HdFy4I86wlDI","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
